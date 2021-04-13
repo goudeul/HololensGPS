@@ -6,13 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.example.mhew.hololensbluetoothgps.MainActivity">
 
+    <EditText
+        android:id="@+id/textBeaconId"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="1775"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBeaconID"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="38dp" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -77,5 +90,15 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonBeaconID"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnClick"
+        android:text="Apply BEACON ID"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>

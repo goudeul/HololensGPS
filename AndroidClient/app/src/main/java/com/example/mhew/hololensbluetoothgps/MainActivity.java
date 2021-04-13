@@ -14,6 +14,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText textBeaconId;
+    Button buttonBeaconID;
     TextView textViewTime;
     TextView textViewLatitude;
     TextView textViewLongitude;
@@ -31,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     BluetoothAdapter mBluetoothAdapter;
     BluetoothLeAdvertiser mBLEAdvertiser;
-    static final int BEACON_ID = 1775;
+//    static final int BEACON_ID = 1775;
     public static final int REQUEST_ENABLE_BT = 1;
 
     LocationManager mLocationManager;
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Setup UI References
+        textBeaconId = (EditText) findViewById(R.id.textBeaconId);
+        buttonBeaconID = (Button) findViewById(R.id.buttonBeaconID);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
         textViewLatitude = (TextView) findViewById(R.id.textViewLatitude);
         textViewLongitude = (TextView) findViewById(R.id.textViewLongitude);
@@ -197,6 +205,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    public void btnClick(View view) {
+        String BEACON_ID = textBeaconId.getText().toString();
+        if( ! BEACON_ID.equals("")){
+            restartAdvertising(Integer.parseInt(BEACON_ID), buildGPSPacket());
+        }
+    }
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -250,7 +266,11 @@ public class MainActivity extends AppCompatActivity {
         textViewTime.setText(new SimpleDateFormat("HH.mm.ss").format(new Date()));
         textViewLatitude.setText(Double.toString(currentLocation.getLatitude()));
         textViewLongitude.setText(Double.toString(currentLocation.getLongitude()));
-        restartAdvertising(BEACON_ID, buildGPSPacket());
+
+        String BEACON_ID = textBeaconId.getText().toString();
+        if( ! BEACON_ID.equals("")){
+            restartAdvertising(Integer.parseInt(BEACON_ID), buildGPSPacket());
+        }
     }
 
     private byte[] buildGPSPacket() {
